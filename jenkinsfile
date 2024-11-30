@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout Code') {
+            steps {
+                // Checkout the code from GitHub
+                git branch: 'main', url: 'https://github.com/your-repo/laravel-project.git'
+            }
+        }
+        stage('Install Dependencies') {
+            steps {
+                // Install Laravel dependencies
+                sh 'composer install --no-dev --optimize-autoloader'
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                // Run Laravel tests
+                sh 'php artisan test'
+            }
+        }
+        // stage('Build') {
+        //     steps {
+        //         // Laravel optimization commands
+        //         sh 'php artisan config:cache'
+        //         sh 'php artisan route:cache'
+        //         sh 'php artisan view:cache'
+        //     }
+        // }
+        // stage('Deploy') {
+        //     steps {
+        //         // Deploy code to production server
+        //         sshagent(['your-ssh-credentials-id']) {
+        //             sh '''
+        //                 rsync -avz --exclude "storage" ./ user@your-server:/path-to-deployment
+        //                 ssh user@your-server "cd /path-to-deployment && php artisan migrate --force"
+        //             '''
+        //         }
+        //     }
+        // }
+    }
+
+    post {
+        always {
+            echo 'Cleaning up workspace...'
+            cleanWs() // Clean up the Jenkins workspace after the job
+        }
+        success {
+            echo 'Build and tests ran successfully!'
+        }
+        failure {
+            echo 'Build or tests failed. Please check the logs.'
+        }
+    }
+}
