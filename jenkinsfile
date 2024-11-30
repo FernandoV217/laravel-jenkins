@@ -11,6 +11,8 @@ pipeline {
             steps {
                 // Install Laravel dependencies
                 sh 'composer install'
+                sh 'npm install'
+                sh 'npm run prod'
                 sh 'cp .env.example .env'
                 sh 'php artisan key:generate'
                 sh 'php artisan config:cache'
