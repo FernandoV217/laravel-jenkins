@@ -16,7 +16,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 // Run Laravel tests
-                sh 'php artisan test'
+                sh './vendor/bin/phpunit'
             }
         }
         // stage('Build') {
