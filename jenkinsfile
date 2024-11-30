@@ -10,7 +10,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Install Laravel dependencies
-                sh 'composer install --no-dev --optimize-autoloader'
+                sh 'composer install'
             }
         }
         stage('Run Tests') {
