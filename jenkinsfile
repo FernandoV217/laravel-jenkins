@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Checkout the code from GitHub
-                git branch: 'main', url: 'https://github.com/your-repo/laravel-project.git'
+                git branch: 'main', url: 'https://github.com/FernandoV217/laravel-jenkins.git'
             }
         }
         stage('Install Dependencies') {
