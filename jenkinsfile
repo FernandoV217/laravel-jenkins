@@ -11,6 +11,8 @@ pipeline {
             steps {
                 // Install Laravel dependencies
                 sh 'composer install'
+                sh 'php artisan key:generate'
+                sh 'php artisan config:cache'
             }
         }
         stage('Run Tests') {
